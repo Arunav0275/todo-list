@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      input[type="button"]{
+        font-size:1.2em;
+        margin:-6px 4px 0px 0px;
+      }
+      
+      #addButton{
+        padding:10px;
+        border-radius:10px;
+      }
+      
+      input[type="text"]{
+        font-size:20px;
+        padding:5px 5px;
+        margin:15px 0px;
+        width:95%;  
+      }
+      ul{
+        padding-left:0;
+      }
+      
+      li {
+         list-style-type: none;
+         background-color: #eee;
+         border: 1px solid #c3c3c3;
+         padding: 10px 0px 10px 5px;
+        font-size:20px;
+      }
+      
+      li.finished{
+        color:white;
+        text-decoration:line-through;
+        background-color:#cccccc;
+      }
+      
+      .important{
+        background-color:lightblue;
+      }
+      .About{
+        background-color:yellow;
+      }
+      #about{
+        margin:0px 0px 15px 0px;
+        font-size:1.5em;
+        width:260px;
+      }
+      
+      .done{
+        background-color:green;
+        
+      }
+      .remove{
+        background-color:red;
+        width:40px;
+      }
+    </style>
+</head>
+<body>
+    <h1 id="myHeader">TO DO List</h1>
+
+    
+    <input type="button" id="addButton" value="Add" onclick="addTask()"/>
+    <input type="text" id="input" placeholder="add text here...">
+    
+     <hr>
+    
+    <ul id="tasks">
+    
+      <li>
+    
+        <input type="button" class="done" onclick="markDone(this.parentNode)" value="&#x2713;" />
+    
+        <input type="button" class="remove" onclick="remove(this.parentNode)" value="&#x2715;" />
+        
+        <input type="button" class="important" value="&#x21" onclick="highlight(this.parentNode)">
+    
+        make todo list
+    
+      </li>
+    
+     </ul>
+    
+    <hr>
+    <div id="about"></div>
+    
+    <input type="button" class="myAbout" value="About" onclick="doAbout()"/>
+    <input type="button" class="clear" value="Clear" onclick="clearAbout()"/>
+    <script>
+      function addTask(){
+    var input=document.getElementById("input");
+    
+    var newitem=input.value;
+    
+    if(newitem !=""){
+       var item = document.createElement("li");
+      
+      item.innerHTML='<input type="button" class="done" onclick="markDone(this.parentNode)" value="&#x2713;" />' + '<input type="button" class="remove" onclick="remove(this.parentNode)" value="&#x2715;" />' + '<input type="button" class="important" value="&#x21" onclick="highlight(this.parentNode)">' + newitem;
+      
+      document.getElementById("tasks").appendChild(item);
+      
+      input.value="";
+      input.placeholder="enter text here...";
+       }
+  }
+  
+  function markDone(item){
+    item.className='finished';
+  }
+  
+  function remove(item){
+    if(item.className=='finished'){
+      item.remove();
+    }else{
+      alert('item has not been ticked yet');
+    }
+  }
+  
+  function highlight(item){
+   if(item.className=="important"){
+      item.className="";
+    }else{
+      item.className="important";
+    }
+  }
+  
+  function doAbout(){
+    var dd1=document.getElementById("about");
+    dd1.innerHTML="Author is Arunav Satyaraj";
+    dd1.className="About";
+  }
+  
+  function clearAbout(){
+    dd1=document.getElementById("about");
+    dd1.innerHTML="";
+  }
+    </script>
+    
+</body>
+</html>
